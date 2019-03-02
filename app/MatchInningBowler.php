@@ -33,7 +33,7 @@ class MatchInningBowler extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function player()
+    public function bowler()
     {
         return $this->belongsTo('App\Player', 'bowler_id');
     }
