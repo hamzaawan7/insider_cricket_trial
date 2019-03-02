@@ -17,7 +17,6 @@
                         <a href="" class="ii i-print"><img src="images/print-icon.png"></a>
                         <a href="" class="ii i-share"><img src="images/share-icon.png"></a>
                     </div>
-
                 </div>
                 <div class="col-md-12">
                     <div class="xo-crumbs clearboth">

@@ -11,6 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('match_detail');
-});
+
+
+
+/*Route::get('match/{id}', 'MatchController@index')->name('match');*/
+Route::get('/standings', 'StandingController@index')->name('standings');
+Route::get('/{tournament_id?}', 'HomeController@index')->name('home');
+/*Route::get('standings1', 'StandingController@index')->name('standings1');*/

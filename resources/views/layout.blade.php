@@ -40,16 +40,6 @@
                     <div class="">
                         <div class="body-overlay"></div>
                         <div class="menu-toggler"></div>
-                        <div class="main-menu-div">
-                            <ul>
-                                <li>
-                                    <a href="index.html">Home</a>
-                                </li>
-                                <li>
-                                    <a href="#">Cricket</a>
-                                </li>
-                            </ul>
-                        </div>
                     </div>
                 </nav>
             </div>
@@ -67,10 +57,10 @@
     <div class="white-area">
         <div class="container">
             <div class="footer-social">
-                <a href=""><span class="fa fa-facebook"></span></a>
-                <a href=""><span class="fa fa-twitter"></span></a>
-                <a href=""><span class="fa fa-linkedin"></span></a>
-                <a href=""><span class="fa fa-youtube"></span></a>
+                <a href="#" onclick="return false;"><span class="fa fa-facebook"></span></a>
+                <a href="#" onclick="return false;"><span class="fa fa-twitter"></span></a>
+                <a href="#" onclick="return false;"><span class="fa fa-linkedin"></span></a>
+                <a href="#" onclick="return false;"><span class="fa fa-youtube"></span></a>
             </div>
         </div>
     </div>

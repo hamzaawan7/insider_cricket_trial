@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $team2_id
  * @property int $venue_id
  * @property int $toss_winner_team_id
+ * @property int $winner_team_id
  * @property int $match_status_id
  * @property string $title
  * @property string $datetime_start
@@ -22,6 +23,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Team $tossWinner
  * @property Tournament $tournament
  * @property Venue $venue
+ * @property Team $winner
  * @property MatchInning[] $matchInnings
  */
 class Match extends Model
@@ -29,7 +31,7 @@ class Match extends Model
     /**
      * @var array
      */
-    protected $fillable = ['tournament_id', 'team1_id', 'team2_id', 'venue_id', 'toss_winner_team_id', 'match_status_id', 'title', 'datetime_start', 'created_at', 'updated_at'];
+    protected $fillable = ['tournament_id', 'team1_id', 'team2_id', 'venue_id', 'toss_winner_team_id', 'winner_team_id', 'match_status_id', 'title', 'datetime_start', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -77,6 +79,14 @@ class Match extends Model
     public function venue()
     {
         return $this->belongsTo('App\Venue');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function winner()
+    {
+        return $this->belongsTo('App\Team', 'winner_team_id');
     }
 
     /**

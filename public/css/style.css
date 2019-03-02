@@ -1629,13 +1629,14 @@ body > .first-view .site-header {
 .xo-crumbs {
     padding-left: 8px;
     letter-spacing: 2px;
+    font-weight: 600;
 }
 
 .xo-crumbs a,
 .xo-crumbs span {
     float: left;
     margin-right: 10px;
-    color: #1f0000;
+    color: #fff;
     font-size: 14px;
 }
 
@@ -3682,7 +3683,7 @@ section.news-page.card-wth-mb {
 }
 
 .tour-info .tour-header {
-    padding: 25px 75px;
+    padding: 25px;
 }
 
 .sn-item {
@@ -8308,4 +8309,8 @@ html, body {
 
 .logo {
     color: #ffffff;
+}
+
+.pad-top-standing{
+    padding-top: 42px !important;
 }

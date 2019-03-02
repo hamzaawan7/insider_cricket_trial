@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property int $id
  * @property int $team_id
- * @property int $rank
  * @property int $matches_played
  * @property int $won
  * @property int $lost
@@ -21,7 +20,7 @@ class Standing extends Model
     /**
      * @var array
      */
-    protected $fillable = ['team_id', 'rank', 'matches_played', 'won', 'lost', 'points', 'created_at', 'updated_at'];
+    protected $fillable = ['team_id', 'matches_played', 'won', 'lost', 'points', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
