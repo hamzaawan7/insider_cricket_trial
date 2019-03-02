@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property int $inning_id
  * @property int $bowler_id
- * @property boolean $is_bowling
  * @property float $overs
  * @property int $maiden
  * @property int $runs
@@ -29,12 +28,12 @@ class MatchInningBowler extends Model
     /**
      * @var array
      */
-    protected $fillable = ['inning_id', 'bowler_id', 'is_bowling', 'overs', 'maiden', 'runs', 'wickets', 'economy', '0s', '4s', '6s', 'wides', 'no_balls', 'created_at', 'updated_at'];
+    protected $fillable = ['inning_id', 'bowler_id', 'overs', 'maiden', 'runs', 'wickets', 'economy', '0s', '4s', '6s', 'wides', 'no_balls', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function player()
+    public function bowler()
     {
         return $this->belongsTo('App\Player', 'bowler_id');
     }

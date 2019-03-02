@@ -22,7 +22,7 @@ class CreateMatchInningBatsmenTable extends Migration
             $table->integer('balls');
             $table->integer('4s');
             $table->integer('6s');
-            $table->double('strike_rate');
+            $table->double('strike_rate')->default(0);
             $table->timestamps();
 
             $table->foreign('inning_id')

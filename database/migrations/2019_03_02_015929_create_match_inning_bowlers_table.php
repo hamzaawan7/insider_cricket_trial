@@ -17,11 +17,11 @@ class CreateMatchInningBowlersTable extends Migration
             $table->increments('id');
             $table->integer('inning_id')->unsigned();
             $table->integer('bowler_id')->unsigned();
-            $table->double('overs');
+            $table->double('overs')->default(0);
             $table->integer('maiden');
             $table->integer('runs');
             $table->integer('wickets');
-            $table->double('economy');
+            $table->double('economy')->default(0);
             $table->integer('0s');
             $table->integer('4s');
             $table->integer('6s');
