@@ -17,11 +17,11 @@ use Illuminate\Database\Eloquent\Model;
  * @property Country $country
  * @property Category $category
  * @property Tournament $tournament
- * @property MatchInning[] $matchInnings
- * @property MatchInning[] $matchInnings
- * @property Match[] $matches
- * @property Match[] $matches
- * @property Match[] $matches
+ * @property MatchInning[] $battingTeam
+ * @property MatchInning[] $fieldingTeam
+ * @property Match[] $team1
+ * @property Match[] $team2
+ * @property Match[] $tossWinner
  * @property Player[] $players
  */
 class Team extends Model
@@ -58,7 +58,7 @@ class Team extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function matchInnings()
+    public function battingTeam()
     {
         return $this->hasMany('App\MatchInning', 'batting_team_id');
     }
@@ -66,7 +66,7 @@ class Team extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function matchInnings()
+    public function fieldingTeam()
     {
         return $this->hasMany('App\MatchInning', 'fielding_team_id');
     }
@@ -74,7 +74,7 @@ class Team extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function matches()
+    public function team1()
     {
         return $this->hasMany('App\Match', 'team1_id');
     }
@@ -82,7 +82,7 @@ class Team extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function matches()
+    public function team2()
     {
         return $this->hasMany('App\Match', 'team2_id');
     }
@@ -90,7 +90,7 @@ class Team extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function matches()
+    public function tossWinner()
     {
         return $this->hasMany('App\Match', 'toss_winner_team_id');
     }

@@ -24,12 +24,12 @@ use Illuminate\Database\Eloquent\Model;
  * @property BowlingStyle $bowlingStyle
  * @property PlayerRole $playerRole
  * @property Team $team
- * @property MatchInningBatsman[] $matchInningBatsmens
- * @property MatchInningBatsman[] $matchInningBatsmens
+ * @property MatchInningBatsman[] $batsman
+ * @property MatchInningBatsman[] $bowledBy
  * @property MatchInningBowler[] $matchInningBowlers
  * @property MatchInningFow[] $matchInningFows
- * @property MatchInningPartnership[] $matchInningPartnerships
- * @property MatchInningPartnership[] $matchInningPartnerships
+ * @property MatchInningPartnership[] $batsman1
+ * @property MatchInningPartnership[] $batsman2
  */
 class Player extends Model
 {
@@ -81,7 +81,7 @@ class Player extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function matchInningBatsmens()
+    public function batsman()
     {
         return $this->hasMany('App\MatchInningBatsman', 'batsman_id');
     }
@@ -89,7 +89,7 @@ class Player extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function matchInningBatsmens()
+    public function bowledBy()
     {
         return $this->hasMany('App\MatchInningBatsman', 'bowled_by_id');
     }
@@ -113,7 +113,7 @@ class Player extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function matchInningPartnerships()
+    public function batsman1()
     {
         return $this->hasMany('App\MatchInningPartnership', 'batsman1_id');
     }
@@ -121,7 +121,7 @@ class Player extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function matchInningPartnerships()
+    public function batsman2()
     {
         return $this->hasMany('App\MatchInningPartnership', 'batsman2_id');
     }

@@ -18,8 +18,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property boolean $is_completed
  * @property string $created_at
  * @property string $updated_at
- * @property Team $team
- * @property Team $team
+ * @property Team $battingTeam
+ * @property Team $fieldingTeam
  * @property Match $match
  * @property MatchInningBatsman[] $matchInningBatsmens
  * @property MatchInningBowler[] $matchInningBowlers
@@ -37,7 +37,7 @@ class MatchInning extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function team()
+    public function battingTeam()
     {
         return $this->belongsTo('App\Team', 'batting_team_id');
     }
@@ -45,7 +45,7 @@ class MatchInning extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function team()
+    public function fieldingTeam()
     {
         return $this->belongsTo('App\Team', 'fielding_team_id');
     }

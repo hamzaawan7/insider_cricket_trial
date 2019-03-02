@@ -17,9 +17,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $created_at
  * @property string $updated_at
  * @property MatchStatus $matchStatus
- * @property Team $team
- * @property Team $team
- * @property Team $team
+ * @property Team $team1
+ * @property Team $team2
+ * @property Team $tossWinner
  * @property Tournament $tournament
  * @property Venue $venue
  * @property MatchInning[] $matchInnings
@@ -42,7 +42,7 @@ class Match extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function team()
+    public function team1()
     {
         return $this->belongsTo('App\Team', 'team1_id');
     }
@@ -50,7 +50,7 @@ class Match extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function team()
+    public function team2()
     {
         return $this->belongsTo('App\Team', 'team2_id');
     }
@@ -58,7 +58,7 @@ class Match extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function team()
+    public function tossWinner()
     {
         return $this->belongsTo('App\Team', 'toss_winner_team_id');
     }

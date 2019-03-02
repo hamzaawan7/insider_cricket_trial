@@ -14,8 +14,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $strike_rate
  * @property string $created_at
  * @property string $updated_at
- * @property Player $player
- * @property Player $player
+ * @property Player $batsman1
+ * @property Player $batsman2
  * @property MatchInning $matchInning
  */
 class MatchInningPartnership extends Model
@@ -28,7 +28,7 @@ class MatchInningPartnership extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function player()
+    public function batsman1()
     {
         return $this->belongsTo('App\Player', 'batsman1_id');
     }
@@ -36,7 +36,7 @@ class MatchInningPartnership extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function player()
+    public function batsman2()
     {
         return $this->belongsTo('App\Player', 'batsman2_id');
     }
