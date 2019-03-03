@@ -84,12 +84,12 @@
                                                             <tr>
                                                                 <td>
                                                                     {{ $player->batsman->short_name }}
-                                                                    @if($player->is_on_strike)
+                                                                    @if($player->is_on_strike && $player->is_batting)
                                                                         *
                                                                     @endif
                                                                 </td>
                                                                 <td>
-                                                                    @if($player->is_batting)
+                                                                    @if($player->is_batting && !$player->has_batted)
                                                                         not out
                                                                     @endif
                                                                 </td>

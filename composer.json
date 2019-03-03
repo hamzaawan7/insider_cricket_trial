@@ -37,7 +37,12 @@
     },
     "autoload": {
         "files": [
-            "app/Helpers/SimulationHelper.php"
+            "app/Helpers/SimulationHelper.php",
+            "app/Helpers/EventHelper.php",
+            "app/Helpers/InningHelper.php",
+            "app/Helpers/BattingHelper.php",
+            "app/Helpers/BowlingHelper.php",
+            "app/Helpers/CalculationHelper.php"
         ],
         "psr-4": {
             "App\\": "app/"

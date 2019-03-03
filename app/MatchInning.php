@@ -22,6 +22,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property float $bowling_rate
  * @property int $extras
  * @property int $target
+ * @property int $last_batting_order
  * @property boolean $is_completed
  * @property string $created_at
  * @property string $updated_at
@@ -45,7 +46,7 @@ class MatchInning extends Model
     /**
      * @var array
      */
-    protected $fillable = ['match_id', 'batting_team_id', 'fielding_team_id', 'current_onstrike_batsman_id', 'current_nonstrike_batsman_id', 'current_bowling_bowler_id', 'current_extra_record_id', 'current_partnership_id', 'number', 'runs', 'wickets', 'overs', 'run_rate', 'bowling_rate', 'extras', 'target', 'is_completed', 'created_at', 'updated_at'];
+    protected $fillable = ['match_id', 'batting_team_id', 'fielding_team_id', 'current_onstrike_batsman_id', 'current_nonstrike_batsman_id', 'current_bowling_bowler_id', 'current_extra_record_id', 'current_partnership_id', 'number', 'runs', 'wickets', 'overs', 'run_rate', 'bowling_rate', 'extras', 'target', 'last_batting_order', 'is_completed', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
