@@ -94,9 +94,10 @@ if (!function_exists('endInnings')) {
                 $loser = $inning->match->team2_id;
                 $winner = $inning->match->team1_id;
             }
+            $match->winner_team_id = $winner;
             $match->match_status_id = 3;
             $match->save();
-            changeStandings($winner, $loser);
+            changeStandings($match->winner_team_id, $loser);
             return;
         }
     }
@@ -206,7 +207,7 @@ if (!function_exists('crossing')) {
 if (!function_exists('checkOverEnd')) {
     function checkOverEnd($overs)
     {
-        $arr = explode(".", $overs);
+        $arr = explode(".", round($overs, 1));
         if ($arr[1] == 6) {
             return true;
         }
@@ -230,13 +231,13 @@ if (!function_exists('checkInningEnd')) {
 if (!function_exists('changeStandings')) {
     function changeStandings($winner, $loser)
     {
-        $standing = Standing::where(['team_id', $winner])->first();
+        $standing = Standing::where(['team_id' => $winner])->first();
         $standing->matches_played = $standing->matches_played + 1;
         $standing->won = $standing->won + 1;
         $standing->points = $standing->points + 3;
         $standing->save();
 
-        $standing = Standing::where(['team_id', $loser])->first();
+        $standing = Standing::where(['team_id' => $loser])->first();
         $standing->matches_played = $standing->matches_played + 1;
         $standing->lost = $standing->lost + 1;
         $standing->save();
