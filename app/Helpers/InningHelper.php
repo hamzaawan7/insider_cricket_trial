@@ -77,6 +77,7 @@ if (!function_exists('endInnings')) {
         if ($inning->number != 2) {
             /* Check If First Innings, if so create new Innings*/
             start_innings($match, 2);
+            return;
         } else {
             /* Check If Second Innings, if so create new Innings*/
             $winner = 0;
@@ -89,9 +90,10 @@ if (!function_exists('endInnings')) {
                 $winner = $inning->fielding_team_id;
             }
             changeStandings($winner, $loser);
+            $match->match_status_id = 3;
+            $match->save();
+            return;
         }
-        $match->match_status_id = 3;
-        $match->save();
     }
 }
 

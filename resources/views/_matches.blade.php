@@ -17,7 +17,13 @@
                             </div>
                         @elseif($match->match_status_id == 3)
                             <div class="stream ended">
-                                <span class="all-caps bg-light-blue taged">{{ $match->winnerTeam->abbreviation }} WON</span>
+                                <span class="all-caps bg-light-blue taged">
+                                    @if(!empty($match->winnerTeam))
+                                        {{ $match->winnerTeam->abbreviation }} WON
+                                    @else
+                                        Match Completed
+                                    @endif
+                                </span>
                             </div>
                         @endif
                     </div>
@@ -29,9 +35,9 @@
                             <div class="runs">
                                 @foreach($match->matchInnings as $inning)
                                     <p>
-                                                        <span class="result-title all-caps">
-                                                            {{ $inning->battingTeam->abbreviation }}
-                                                        </span>
+                                        <span class="result-title all-caps">
+                                            {{ $inning->battingTeam->abbreviation }}
+                                        </span>
                                         {{ $inning->runs }}/{{ $inning->wickets }}
                                         ({{ $inning->overs }} ov)
                                     </p>

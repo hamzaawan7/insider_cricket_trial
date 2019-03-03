@@ -19,6 +19,7 @@ class RestartAllMatchesSeeder extends Seeder
         App\MatchInningPartnership::truncate();
         App\MatchInningFow::truncate();
         App\MatchInningExtra::truncate();
+        App\Standing::truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         DB::table('matches')->update([
             'match_status_id' => 1,
