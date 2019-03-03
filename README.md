@@ -55,10 +55,6 @@ to run the following command:
     action and standings links is also there to see the 
     standings of the teams in the table. The standings of the tournament 
     table will update once the matches finish.
-    
-### Database Design
-
- ! [alt text](db_design.png "Logo Title Text 1")
 
 
 ### Simulation Algorithm
