@@ -21,7 +21,7 @@
                                     @if(!empty($match->winnerTeam))
                                         {{ $match->winnerTeam->abbreviation }} WON
                                     @else
-                                        Match Completed
+                                        WON
                                     @endif
                                 </span>
                             </div>
@@ -193,56 +193,43 @@
                                             </div>
                                         @endif
                                     </div>
-                                @endforeach
-
-                                @if(count($inning->matchInningPartnerships))
-                                    <div class="batting">
-                                        <div class="table-responsive">
-                                            <table class="table">
-                                                <thead>
-                                                <tr>
-                                                    <th width="35%">Partnerships</th>
-                                                    <th width="45%"></th>
-                                                    <th width="7%"></th>
-                                                    <th width="7%"></th>
-                                                    <th width="7%">R</th>
-                                                    <th width="7%">B</th>
-                                                    <th width="7%">SR</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                @foreach($inning->matchInningPartnerships as $partnership)
+                                    @if(count($inning->matchInningPartnerships))
+                                        <div class="batting">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
                                                     <tr>
-                                                        <td>
-                                                            {{ $partnership->batsman1->short_name }}
-                                                        </td>
-                                                        <td>
-                                                            {{ $partnership->batsman2->short_name }}
-                                                        </td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td>{{ $partnership->runs_contribution }}</td>
-                                                        <td>{{ $partnership->balls_faced }}</td>
-                                                        <td>{{ $partnership->strike_rate }}</td>
+                                                        <th width="35%">Partnerships</th>
+                                                        <th width="45%"></th>
+                                                        <th width="7%"></th>
+                                                        <th width="7%"></th>
+                                                        <th width="7%">R</th>
+                                                        <th width="7%">B</th>
+                                                        <th width="7%">SR</th>
                                                     </tr>
-                                                @endforeach
-                                                @if(count($inning->matchInningExtras))
-                                                    <tr class="sub-res">
-                                                        <td colspan="3">Extras</td>
-                                                        <td colspan="4">
-                                                            {{ $inning->matchInningExtras[0]->total }}
-                                                            (w {{ $inning->matchInningExtras[0]->wides }}
-                                                            ,
-                                                            nb {{ $inning->matchInningExtras[0]->no_balls }}
-                                                            )
-                                                        </td>
-                                                    </tr>
-                                                @endif
-                                                </tbody>
-                                            </table>
+                                                    </thead>
+                                                    <tbody>
+                                                    @foreach($inning->matchInningPartnerships as $partnership)
+                                                        <tr>
+                                                            <td>
+                                                                {{ $partnership->batsman1->short_name }}
+                                                            </td>
+                                                            <td>
+                                                                {{ $partnership->batsman2->short_name }}
+                                                            </td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td>{{ $partnership->runs_contribution }}</td>
+                                                            <td>{{ $partnership->balls_faced }}</td>
+                                                            <td>{{ $partnership->strike_rate }}</td>
+                                                        </tr>
+                                                    @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
-                                    </div>
-                                @endif
+                                    @endif
+                                @endforeach
                             @else
                                 <center>
                                     <a href="{{ route('start-matches') }}" class="btn btn-danger">START

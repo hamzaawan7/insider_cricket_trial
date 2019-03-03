@@ -28,7 +28,7 @@ if (!function_exists('simulate')) {
         $current_extra_record = $inning->currentExtraRecord;
         $current_partnership = $inning->currentPartnership;
         $end = false;
-        for ($i = 0; $i < floor($inning->bowling_rate); $i++) {
+        for ($i = 0; $i < 3/*floor($inning->bowling_rate)*/; $i++) {
             $event = whatHappened();
             switch ($event) {
                 case 0:

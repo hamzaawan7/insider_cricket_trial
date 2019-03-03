@@ -24,7 +24,12 @@ if (!function_exists('start_innings')) {
         $inning->batting_team_id = ($number == 1) ? $match->team1_id : $match->team2_id;
         $inning->fielding_team_id = ($number == 1) ? $match->team2_id : $match->team1_id;
         $inning->number = $number;
-        $inning->target = ($number == 2) ? $match->currentInning->runs + 1 : null;
+        if($number == 2){
+            foreach ($match->matchInnings as $in){
+                $inning->target = $in->runs + 1;
+                break;
+            }
+        }
         if ($inning->save()) {
             $batsman1 = new MatchInningBatsman();
             $batsman1->inning_id = $inning->id;
@@ -83,15 +88,15 @@ if (!function_exists('endInnings')) {
             $winner = 0;
             $loser = 0;
             if ($inning->runs >= $inning->target) {
-                $winner = $inning->batting_team_id;
-                $loser = $inning->fielding_team_id;
+                $winner = $inning->match->team1_id;
+                $loser = $inning->match->team2_id;
             } else if ($inning->runs < $inning->target - 1) {
-                $loser = $inning->batting_team_id;
-                $winner = $inning->fielding_team_id;
+                $loser = $inning->match->team2_id;
+                $winner = $inning->match->team1_id;
             }
-            changeStandings($winner, $loser);
             $match->match_status_id = 3;
             $match->save();
+            changeStandings($winner, $loser);
             return;
         }
     }
@@ -115,7 +120,7 @@ if (!function_exists('addExtraScore')) {
         $inning->runs = $inning->runs + 1;
         /*$inning->save();*/
 
-        if ($inning->number == 2 && $inning->runs > $inning->match->matchInnings[0]->runs) {
+        if ($inning->number == 2 && $inning->runs >= $inning->target->runs) {
             endInnings($inning);
             return true;
         }
@@ -170,7 +175,7 @@ if (!function_exists('updateScore')) {
         $inning->runs = $inning->runs + $score;
         /*$inning->save();*/
 
-        if ($inning->number == 2 && $inning->runs > $inning->match->matchInnings[0]->runs) {
+        if ($inning->number == 2 && $inning->runs >= $inning->target) {
             endInnings($inning);
             return true;
         }
