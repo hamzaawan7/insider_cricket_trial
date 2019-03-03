@@ -24,9 +24,8 @@ if (!function_exists('calculateStrikeRate')) {
 if (!function_exists('calculateEconomy')) {
     function calculateEconomy($runs, $overs)
     {
-        $over = floor($overs);      // 1
-        $ball = $overs - $over; // .25
-        $balls = ($over * 6) + $ball;
+        $arr = explode(".", round($overs, 1));
+        $balls = ($arr[0] * 6) + $arr[1];
         return round(($runs / $balls), 2);
     }
 }

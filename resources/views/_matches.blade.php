@@ -85,7 +85,7 @@
                                                                 <td>
                                                                     {{ $player->batsman->short_name }}
                                                                     @if($player->is_on_strike && $player->is_batting)
-                                                                        *
+                                                                        <span style="color: red">*</span>
                                                                     @endif
                                                                 </td>
                                                                 <td>

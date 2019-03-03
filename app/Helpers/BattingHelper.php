@@ -38,43 +38,42 @@ if (!function_exists('changeBatsman')) {
         if ($is_bowler_bowled) {
             $current_onstrike_batsman->bowled_by_id = $current_bowler->bowler_id;
         }
-        if ($current_onstrike_batsman->save()) {
-            $current_bowler->wickets = $current_bowler->wickets + 1;
-            $current_bowler->save();
+        /*$current_onstrike_batsman->save();*/
 
-            $inning->wickets = $inning->wickets + 1;
-            $inning->save();
+        $current_bowler->wickets = $current_bowler->wickets + 1;
+        /*$current_bowler->save();*/
 
-            $fow = new MatchInningFow();
-            $fow->inning_id = $inning->id;
-            $fow->bowled_by_id = $current_bowler->bowler_id;
-            $fow->number = $inning->wickets;
-            $fow->runs = $inning->runs;
-            $fow->overs = round($inning->overs, 1);
-            if ($fow->save()) {
-                if ($inning->wickets == 10) {
-                    endInnings($inning);
-                    return true;
-                }
-                /* Assigning new Batsman */
-                $batsman = newBatsman($inning);
+        $inning->wickets = $inning->wickets + 1;
+        /*$inning->save();*/
 
-                $current_onstrike_batsman = new MatchInningBatsman();
-                $current_onstrike_batsman->inning_id = $inning->id;
-                $current_onstrike_batsman->batsman_id = $batsman->id;
-                $current_onstrike_batsman->save();
-
-                $current_partnership = new MatchInningPartnership();
-                $current_partnership->inning_id = $inning->id;
-                $current_partnership->batsman1_id = $current_nonstrike_batsman->id;
-                $current_partnership->batsman2_id = $current_onstrike_batsman->id;
-                $current_partnership->save();
-
-                $inning->last_batting_order = $batsman->batting_order;
-                $inning->current_onstrike_batsman_id = $current_onstrike_batsman->id;
-                $inning->save();
-            }
+        $fow = new MatchInningFow();
+        $fow->inning_id = $inning->id;
+        $fow->bowled_by_id = $current_bowler->bowler_id;
+        $fow->number = $inning->wickets;
+        $fow->runs = $inning->runs;
+        $fow->overs = round($inning->overs, 1);
+        $fow->save();
+        if ($inning->wickets == 10) {
+            endInnings($inning);
+            return true;
         }
+        /* Assigning new Batsman */
+        $batsman = newBatsman($inning);
+
+        $current_onstrike_batsman = new MatchInningBatsman();
+        $current_onstrike_batsman->inning_id = $inning->id;
+        $current_onstrike_batsman->batsman_id = $batsman->id;
+        $current_onstrike_batsman->save();
+
+        $current_partnership = new MatchInningPartnership();
+        $current_partnership->inning_id = $inning->id;
+        $current_partnership->batsman1_id = $current_nonstrike_batsman->id;
+        $current_partnership->batsman2_id = $current_onstrike_batsman->id;
+        /*$current_partnership->save();*/
+
+        $inning->last_batting_order = $batsman->batting_order;
+        $inning->current_onstrike_batsman_id = $current_onstrike_batsman->id;
+        /*$inning->save();*/
         return false;
     }
 }

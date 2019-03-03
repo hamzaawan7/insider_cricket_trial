@@ -8,6 +8,7 @@
 
 return [
     'max_over_limit' => 4,
+    'over_ball_limit' => 6,
     'match_over_limit' => 20,
 ];
 

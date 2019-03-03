@@ -96,7 +96,6 @@ if (!function_exists('simulate')) {
                             $end = addExtraScore($current_extra_record, $current_bowler, $inning, 2);
                             break;
                     }
-                    goodBowlDataUpdate($inning, $current_onstrike_batsman, $current_bowler, $current_partnership);
                     break;
                 case 5:
                     changeBowlingRate($inning, "nothing");
@@ -118,6 +117,12 @@ if (!function_exists('simulate')) {
                 /* Crossing Batsman */
                 crossing($current_onstrike_batsman, $current_nonstrike_batsman, $inning);
             }
+            $current_onstrike_batsman->save();
+            $current_nonstrike_batsman->save();
+            $current_bowler->save();
+            $current_extra_record->save();
+            $current_partnership->save();
+            $inning->save();
         }
     }
 }

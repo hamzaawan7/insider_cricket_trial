@@ -88,13 +88,13 @@ if (!function_exists('addExtraScore')) {
             $current_extra_record->no_balls = $current_extra_record->no_balls + 1;
         }
         $current_extra_record->total = $current_extra_record->total + 1;
-        $current_extra_record->save();
+        /*$current_extra_record->save();*/
 
         $current_bowler->runs = $current_bowler->runs + 1;
-        $current_bowler->save();
+        /*$current_bowler->save();*/
 
-        $inning->runs = $current_bowler->runs + 1;
-        $inning->save();
+        $inning->runs = $inning->runs + 1;
+        /*$inning->save();*/
 
         if ($inning->number == 2 && $inning->runs > $inning->match->matchInnings[0]->runs) {
             endInnings($inning);
@@ -108,12 +108,15 @@ if (!function_exists('addExtraScore')) {
 if (!function_exists('changeBowlingRate')) {
     function changeBowlingRate($inning, $code)
     {
-        /*$arr = getBowlingRateCode($code);
+        $arr = getBowlingRateCode($code);
         if($arr['is_increase']){
             $inning->bowling_rate = round($inning->bowling_rate + $arr['rate'], '1');
         } else {
             $inning->bowling_rate = round($inning->bowling_rate - $arr['rate'], '1');
-        }*/
+            if($inning->bowling_rate < 1){
+                $inning->bowling_rate = 1;
+            }
+        }
     }
 }
 
@@ -127,7 +130,7 @@ if (!function_exists('updateScore')) {
         if ($score == 6) {
             $current_onstrike_batsman->sixes = $current_onstrike_batsman->sixes + 1;
         }
-        $current_onstrike_batsman->save();
+        /*$current_onstrike_batsman->save();*/
 
         $current_bowler->runs = $current_bowler->runs + $score;
         if ($score == 4) {
@@ -136,13 +139,13 @@ if (!function_exists('updateScore')) {
         if ($score == 6) {
             $current_bowler->sixes = $current_bowler->sixes + 1;
         }
-        $current_bowler->save();
+        /*$current_bowler->save();*/
 
         $current_partnership->runs_contribution = $current_partnership->runs_contribution + $score;
-        $current_partnership->save();
+        /*$current_partnership->save();*/
 
         $inning->runs = $inning->runs + $score;
-        $inning->save();
+        /*$inning->save();*/
 
         if ($inning->number == 2 && $inning->runs > $inning->match->matchInnings[0]->runs) {
             endInnings($inning);
@@ -157,24 +160,23 @@ if (!function_exists('crossing')) {
     function crossing($current_onstrike_batsman, $current_nonstrike_batsman, $inning)
     {
         $current_onstrike_batsman->is_on_strike = 0;
-        $current_onstrike_batsman->save();
+        /*$current_onstrike_batsman->save();*/
 
         $current_nonstrike_batsman->is_on_strike = 1;
-        $current_nonstrike_batsman->save();
+        /*$current_nonstrike_batsman->save();*/
 
         $temp = $current_onstrike_batsman;
         $current_onstrike_batsman = $current_nonstrike_batsman;
         $current_nonstrike_batsman = $temp;
         $inning->current_onstrike_batsman_id = $current_onstrike_batsman->id;
         $inning->current_nonstrike_batsman_id = $current_nonstrike_batsman->id;
-        $inning->save();
+        /*$inning->save();*/
     }
 }
 
 if (!function_exists('checkOverEnd')) {
     function checkOverEnd($overs)
     {
-        $overs = round($overs, 1);
         $arr = explode(".", $overs);
         if ($arr[1] == 6) {
             return true;
