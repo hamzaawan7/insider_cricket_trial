@@ -1,13 +1,13 @@
 # insider_cricket_trial
 
-##Description
+## Description
 
-###Tools
+### Tools
 This project is made on laravel 5.7 and PHP 7.2. 
 The dependency manager used by by this project is
 `composer`.
 
-###Summary
+### Summary
 This is a cricket simulation project. It consists of following
 tournaments consist of matches between teams.
 
@@ -16,7 +16,7 @@ that have registered eight teams. Each team has 11 players with
 vaying skill set. All of the player information is saved in the
 database.
 
-###How to use
+### How to use
 For running the project. 
 1) You need to create an empty database
 2) Import `insider_cricket_trial.sql` file
@@ -55,13 +55,9 @@ to run the following command:
     action and standings links is also there to see the 
     standings of the teams in the table. The standings of the tournament 
     table will update once the matches finish.
-    
-###Database Design
-
- ![alt text](db_design.png "Logo Title Text 1")
 
 
-###Simulation Algorithm
+### Simulation Algorithm
 
 The simulation algorith consists run every 5 seconds which is equal
 to one minute. Now in this algorithm there is `bowling_rate` attribute
@@ -91,17 +87,17 @@ The bowler will have more probability to get the wicket due to the
 biasnes of the wicket weight toward the home team on that scenario.
 However, I was not able to implement it due to the lack of time.
 
-###Architecture
+### Architecture
 
 The `MVC design pattern` has been used in this system. The simulation
 function is called from the `RoundController@runSimulation` function
 and it has many helper classes to under the `Http/Helpers` directory
 to perform the functions of the simulation.
 
-#####Note
+##### Note
 I tried to make the simulation as fluent and correct as possible
 with additional things like fall of wickets, extras, partnerships
 etc. There is a use case when reached the simulation becomes buggy,
 please try to be linient. I could have fixed that if I had more time.
 
-######Cheers :)
+###### Cheers
