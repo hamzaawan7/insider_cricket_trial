@@ -18,7 +18,7 @@
                                 <div class="xo-crumbs clearboth">
                                     <a href="#" onclick="return false">Insider</a>
                                     <span>></span>
-                                    <a href="{{ route('home') }}">Matches</a>
+                                    <a href="{{ route('round-info') }}">Matches</a>
                                     <span>></span>
                                     <a href="#" onclick="return false">Standings</a>
                                 </div>

@@ -18,6 +18,7 @@ class CreateMatchInningExtrasTable extends Migration
             $table->integer('inning_id')->unsigned();
             $table->integer('wides');
             $table->integer('no_balls');
+            $table->integer('total');
             $table->timestamps();
 
             $table->foreign('inning_id')

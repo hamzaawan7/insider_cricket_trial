@@ -13,17 +13,19 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $toss_winner_team_id
  * @property int $winner_team_id
  * @property int $match_status_id
+ * @property int $current_innings_id
  * @property string $title
  * @property string $datetime_start
  * @property string $created_at
  * @property string $updated_at
+ * @property MatchInning $currentInning
  * @property MatchStatus $matchStatus
  * @property Team $team1
  * @property Team $team2
- * @property Team $tossWinner
+ * @property Team $tossWinnerTeam
  * @property Tournament $tournament
  * @property Venue $venue
- * @property Team $winner
+ * @property Team $winnerTeam
  * @property MatchInning[] $matchInnings
  */
 class Match extends Model
@@ -31,7 +33,15 @@ class Match extends Model
     /**
      * @var array
      */
-    protected $fillable = ['tournament_id', 'team1_id', 'team2_id', 'venue_id', 'toss_winner_team_id', 'winner_team_id', 'match_status_id', 'title', 'datetime_start', 'created_at', 'updated_at'];
+    protected $fillable = ['tournament_id', 'team1_id', 'team2_id', 'venue_id', 'toss_winner_team_id', 'winner_team_id', 'match_status_id', 'current_innings_id', 'title', 'datetime_start', 'created_at', 'updated_at'];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function currentInning()
+    {
+        return $this->belongsTo('App\MatchInning', 'current_innings_id');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -60,7 +70,7 @@ class Match extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function tossWinner()
+    public function tossWinnerTeam()
     {
         return $this->belongsTo('App\Team', 'toss_winner_team_id');
     }
@@ -84,7 +94,7 @@ class Match extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function winner()
+    public function winnerTeam()
     {
         return $this->belongsTo('App\Team', 'winner_team_id');
     }

@@ -14,27 +14,29 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $runs
  * @property int $wickets
  * @property float $economy
- * @property int $0s
- * @property int $4s
- * @property int $6s
+ * @property int $zeros
+ * @property int $fours
+ * @property int $sixes
  * @property int $wides
  * @property int $no_balls
+ * @property boolean $has_bowled_previous_over
  * @property string $created_at
  * @property string $updated_at
- * @property Player $player
+ * @property Player $bowler
  * @property MatchInning $matchInning
+ * @property MatchInning[] $matchInnings
  */
 class MatchInningBowler extends Model
 {
     /**
      * @var array
      */
-    protected $fillable = ['inning_id', 'bowler_id', 'is_bowling', 'overs', 'maiden', 'runs', 'wickets', 'economy', '0s', '4s', '6s', 'wides', 'no_balls', 'created_at', 'updated_at'];
+    protected $fillable = ['inning_id', 'bowler_id', 'is_bowling', 'overs', 'maiden', 'runs', 'wickets', 'economy', 'zeros', 'fours', 'sixes', 'wides', 'no_balls', 'has_bowled_previous_over', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function player()
+    public function bowler()
     {
         return $this->belongsTo('App\Player', 'bowler_id');
     }
@@ -45,5 +47,13 @@ class MatchInningBowler extends Model
     public function matchInning()
     {
         return $this->belongsTo('App\MatchInning', 'inning_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function matchInnings()
+    {
+        return $this->hasMany('App\MatchInning', 'current_bowling_bowler_id');
     }
 }

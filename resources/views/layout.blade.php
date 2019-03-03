@@ -21,6 +21,8 @@
           rel="stylesheet"/>
 
     <title>Cricket - @yield('title')</title>
+
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
 </head>
 
 <body>
@@ -84,8 +86,6 @@
         </div>
     </div>
 </footer>
-
-<script src="{{ asset('js/jquery.min.js') }}"></script>
 <!-- Plugins JS -->
 <!-- @migrate 3.0.1
     @Bootstrap 4.1.1 + Popper
@@ -94,6 +94,7 @@
     @fancy box 1.3.4 -->
 <script src="{{ asset('js/plugins.js') }}"></script>
 <script src="{{ asset('js/hashe.js') }}"></script>
+@yield('scripts')
 
 </body>
 </html>

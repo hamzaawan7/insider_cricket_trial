@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Player $batsman1
  * @property Player $batsman2
  * @property MatchInning $matchInning
+ * @property MatchInning[] $matchInnings
  */
 class MatchInningPartnership extends Model
 {
@@ -47,5 +48,13 @@ class MatchInningPartnership extends Model
     public function matchInning()
     {
         return $this->belongsTo('App\MatchInning', 'inning_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function matchInnings()
+    {
+        return $this->hasMany('App\MatchInning', 'current_partnership_id');
     }
 }
