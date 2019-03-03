@@ -2,25 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a963152c-b172-47a4-a18b-f50dba5dbaf1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Helpers/SimulationHelper.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/constants.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/_matches.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/RoundController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Match.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Match.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/MatchInning.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/MatchInning.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Helpers/SimulationHelper.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helpers/SimulationHelper.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/MatchInningBatsman.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/MatchInningBatsman.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/MatchInningBowler.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/MatchInningBowler.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/MatchInningPartnership.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/MatchInningPartnership.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_03_02_015944_create_match_inning_extras_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_03_02_015944_create_match_inning_extras_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/jquery.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/jquery.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layout.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/standings.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/standings.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/tournament_matches.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/tournament_matches.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,8 +19,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/RoundController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="84">
-              <caret line="39" column="35" selection-start-line="39" selection-start-column="35" selection-end-line="39" selection-end-column="35" />
+            <state relative-caret-position="203">
+              <caret line="46" column="13" selection-start-line="46" selection-start-column="13" selection-end-line="46" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -45,8 +28,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Helpers/SimulationHelper.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="118">
-              <caret line="49" column="26" lean-forward="true" selection-start-line="49" selection-start-column="26" selection-end-line="49" selection-end-column="26" />
+            <state relative-caret-position="271">
+              <caret line="376" column="38" lean-forward="true" selection-start-line="376" selection-start-column="38" selection-end-line="376" selection-end-column="38" />
               <folding>
                 <element signature="e#91#111#0#PHP" expanded="true" />
               </folding>
@@ -55,10 +38,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/MatchInningBatsman.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="393">
+              <caret line="32" column="111" selection-start-line="32" selection-start-column="111" selection-end-line="32" selection-end-column="111" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/database/seeds/RestartAllMatchesSeeder.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="85">
-              <caret line="5" column="1" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
+              <caret line="5" selection-start-line="5" selection-end-line="5" />
             </state>
           </provider>
         </entry>
@@ -95,15 +87,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="390">
               <caret line="59" column="7" selection-start-line="59" selection-start-column="7" selection-end-line="59" selection-end-column="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/MatchInningBatsman.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="47" column="5" selection-start-line="47" selection-start-column="5" selection-end-line="47" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -163,7 +146,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/database/migrations/2019_03_02_015655_create_match_inning_batsmen_table.php" />
         <option value="$PROJECT_DIR$/database/migrations/2019_03_02_015929_create_match_inning_bowlers_table.php" />
         <option value="$PROJECT_DIR$/database/migrations/2019_03_02_101504_add_field_match_innings_batsmen_table.php" />
         <option value="$PROJECT_DIR$/database/migrations/2019_03_02_100847_create_standings_table.php" />
@@ -205,7 +187,6 @@
         <option value="$PROJECT_DIR$/database/migrations/2019_03_03_002131_change_field_bowling_rate_match_innings_table.php" />
         <option value="$PROJECT_DIR$/database/migrations/2019_03_02_015944_create_match_inning_extras_table.php" />
         <option value="$PROJECT_DIR$/database/migrations/2019_03_03_005439_add_field_non_strike_match_innings_table.php" />
-        <option value="$PROJECT_DIR$/app/MatchInningBatsman.php" />
         <option value="$PROJECT_DIR$/app/MatchInning.php" />
         <option value="$PROJECT_DIR$/config/constants.php" />
         <option value="$PROJECT_DIR$/resources/views/tournament_matches.blade.php" />
@@ -213,6 +194,8 @@
         <option value="$PROJECT_DIR$/database/seeds/RestartAllMatchesSeeder.php" />
         <option value="$PROJECT_DIR$/database/migrations/2019_03_03_043815_change_default_values_match_inning_fows_table.php" />
         <option value="$PROJECT_DIR$/resources/views/_matches.blade.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2019_03_03_055058_add_has_batted_match_inning_batsmen_table.php" />
+        <option value="$PROJECT_DIR$/app/MatchInningBatsman.php" />
         <option value="$PROJECT_DIR$/app/Helpers/SimulationHelper.php" />
       </list>
     </option>
@@ -466,12 +449,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1551448283231</updated>
-      <workItem from="1551448284761" duration="98319000" />
+      <workItem from="1551448284761" duration="103216000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="98319000" />
+    <option name="totallyTimeSpent" value="103216000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -502,11 +485,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Matches.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-765" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/database/migrations/2019_03_02_123224_add_winner_team_id_matches_table.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -679,13 +657,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2019_03_02_233228_change_field_match_inning_bowlers_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="99" selection-start-line="17" selection-start-column="99" selection-end-line="17" selection-end-column="99" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/database/migrations/2019_03_02_160201_change_fields_match_inning_bb_table.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
@@ -783,20 +754,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/MatchInningBatsman.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="47" column="5" selection-start-line="47" selection-start-column="5" selection-end-line="47" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/MatchInning.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="59" column="7" selection-start-line="59" selection-start-column="7" selection-end-line="59" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/tournament_matches.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="629">
@@ -804,24 +761,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2019_03_03_005439_add_field_non_strike_match_innings_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="22" column="11" selection-start-line="16" selection-start-column="8" selection-end-line="22" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/database/migrations/2019_03_03_043815_change_default_values_match_inning_fows_table.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="15" column="10" lean-forward="true" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/RoundController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="39" column="35" selection-start-line="39" selection-start-column="35" selection-end-line="39" selection-end-column="35" />
         </state>
       </provider>
     </entry>
@@ -839,17 +782,59 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/MatchInning.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="59" column="7" selection-start-line="59" selection-start-column="7" selection-end-line="59" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/database/seeds/RestartAllMatchesSeeder.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
-          <caret line="5" column="1" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2019_03_03_005439_add_field_non_strike_match_innings_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="22" column="11" selection-start-line="16" selection-start-column="8" selection-end-line="22" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2019_03_02_233228_change_field_match_inning_bowlers_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="18" column="11" selection-start-line="16" selection-start-column="8" selection-end-line="18" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2019_03_03_055058_add_has_batted_match_inning_batsmen_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="16" column="39" selection-start-line="16" selection-start-column="39" selection-end-line="16" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/RoundController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="46" column="13" selection-start-line="46" selection-start-column="13" selection-end-line="46" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/MatchInningBatsman.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="393">
+          <caret line="32" column="111" selection-start-line="32" selection-start-column="111" selection-end-line="32" selection-end-column="111" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Helpers/SimulationHelper.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
-          <caret line="49" column="26" lean-forward="true" selection-start-line="49" selection-start-column="26" selection-end-line="49" selection-end-column="26" />
+        <state relative-caret-position="271">
+          <caret line="376" column="38" lean-forward="true" selection-start-line="376" selection-start-column="38" selection-end-line="376" selection-end-column="38" />
           <folding>
             <element signature="e#91#111#0#PHP" expanded="true" />
           </folding>

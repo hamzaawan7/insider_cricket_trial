@@ -34,15 +34,15 @@ if (!function_exists('simulate')) {
                     $score = whichRun();
                     switch ($score) {
                         case 0:
-                            updateScore($current_onstrike_batsman, $current_bowler, $current_partnership, $inning, 1);
+                            $end = updateScore($current_onstrike_batsman, $current_bowler, $current_partnership, $inning, 1);
                             crossing($current_onstrike_batsman, $current_nonstrike_batsman, $inning);
                             changeBowlingRate($inning, "single");
                             break;
                         case 1:
-                            updateScore($current_onstrike_batsman, $current_bowler, $current_partnership, $inning, 2);
+                            $end = updateScore($current_onstrike_batsman, $current_bowler, $current_partnership, $inning, 2);
                             break;
                         case 2:
-                            updateScore($current_onstrike_batsman, $current_bowler, $current_partnership, $inning, 3);
+                            $end = updateScore($current_onstrike_batsman, $current_bowler, $current_partnership, $inning, 3);
                             crossing($current_onstrike_batsman, $current_nonstrike_batsman, $inning);
                             break;
                     }
@@ -52,11 +52,11 @@ if (!function_exists('simulate')) {
                     $score = whichBoundary();
                     switch ($score) {
                         case 0:
-                            updateScore($current_onstrike_batsman, $current_bowler, $current_partnership, $inning, 4);
+                            $end = updateScore($current_onstrike_batsman, $current_bowler, $current_partnership, $inning, 4);
                             changeBowlingRate($inning, "four");
                             break;
                         case 1:
-                            updateScore($current_onstrike_batsman, $current_bowler, $current_partnership, $inning, 6);
+                            $end = updateScore($current_onstrike_batsman, $current_bowler, $current_partnership, $inning, 6);
                             changeBowlingRate($inning, "six");
                             break;
                     }
@@ -82,6 +82,24 @@ if (!function_exists('simulate')) {
                             break;
                     }
                     goodBowlDataUpdate($inning, $current_onstrike_batsman, $current_bowler, $current_partnership);
+                    break;
+                case 4:
+                    $extra = howExtra();
+                    switch ($extra) {
+                        case 0:
+                            $end = addExtraScore($current_extra_record, $current_bowler, $inning, 0);
+                            break;
+                        case 1:
+                            $end = addExtraScore($current_extra_record, $current_bowler, $inning, 1);
+                            break;
+                        case 2:
+                            $end = addExtraScore($current_extra_record, $current_bowler, $inning, 2);
+                            break;
+                    }
+                    goodBowlDataUpdate($inning, $current_onstrike_batsman, $current_bowler, $current_partnership);
+                    break;
+                case 5:
+                    changeBowlingRate($inning, "nothing");
                     break;
             }
 
@@ -117,6 +135,17 @@ if (!function_exists('howOut')) {
     }
 }
 
+if (!function_exists('howExtra')) {
+    function howExtra()
+    {
+        return array_rand(array(
+            0 => "wd",
+            1 => "nb",
+            2 => "lb"
+        ));
+    }
+}
+
 if (!function_exists('endInnings')) {
     function endInnings($inning)
     {
@@ -133,6 +162,32 @@ if (!function_exists('endInnings')) {
     }
 }
 
+if (!function_exists('addExtraScore')) {
+    function addExtraScore($current_extra_record, $current_bowler, $inning, $how)
+    {
+        if ($how == 0) {
+            $current_extra_record->wides = $current_extra_record->wides + 1;
+        } else if ($how == 1) {
+            $current_extra_record->no_balls = $current_extra_record->no_balls + 1;
+        }
+        $current_extra_record->total = $current_extra_record->total + 1;
+        $current_extra_record->save();
+
+        $current_bowler->runs = $current_bowler->runs + 1;
+        $current_bowler->save();
+
+        $inning->runs = $current_bowler->runs + 1;
+        $inning->save();
+
+        if ($inning->number == 2 && $inning->runs > $inning->match->matchInnings[0]->runs) {
+            endInnings($inning);
+            return true;
+        }
+
+        return false;
+    }
+}
+
 if (!function_exists('whatHappened')) {
     function whatHappened()
     {
@@ -141,8 +196,8 @@ if (!function_exists('whatHappened')) {
             1 => "runs_scored",
             2 => "boundary",
             3 => "wicket",
-            /*4 => "extra",
-            5 => "nothing",*/
+            4 => "extra",
+            5 => "nothing",
         ));
     }
 }
@@ -258,16 +313,76 @@ if (!function_exists('start_innings')) {
     }
 }
 
-if (!function_exists('getBatsman')) {
-    function getBatsman($inning, $team_id)
+if (!function_exists('changeBatsman')) {
+    function changeBatsman($current_onstrike_batsman, $current_nonstrike_batsman, $current_bowler, $current_partnership, $inning, $is_bowler_bowled)
     {
-        $players = Player::where(['team_id' => $team_id])->orderBy('batting_order', 'asc')->get();
-        if (!empty($players)) {
-            foreach ($players as $player) {
-                $inning_player = MatchInningBatsman::where(['batsman_id' => $player->id])->where(['inning_id' => $inning->id])->first();
-                if (empty($inning_player)) {
-                    return $player->id;
+        $current_onstrike_batsman->is_on_strike = 0;
+        $current_onstrike_batsman->is_batting = 0;
+        $current_onstrike_batsman->has_batted = 1;
+        $current_onstrike_batsman->balls = $current_onstrike_batsman->balls + 1;
+        if ($is_bowler_bowled) {
+            $current_onstrike_batsman->bowled_by_id = $current_bowler->bowler_id;
+        }
+        if ($current_onstrike_batsman->save()) {
+            $current_bowler->wickets = $current_bowler->wickets + 1;
+            $current_bowler->save();
+
+            $inning->wickets = $inning->wickets + 1;
+            $inning->save();
+
+            $fow = new MatchInningFow();
+            $fow->inning_id = $inning->id;
+            $fow->bowled_by_id = $current_bowler->bowler_id;
+            $fow->number = $inning->wickets;
+            $fow->runs = $inning->runs;
+            $fow->overs = round($inning->overs, 1);
+            if ($fow->save()) {
+                if ($inning->wickets == 10) {
+                    endInnings($inning);
+                    return true;
                 }
+                /* Assigning new Batsman */
+                $batsman_id = getBatsman($inning, $inning->batting_team_id, $current_onstrike_batsman->batsman);
+
+                $current_onstrike_batsman = new MatchInningBatsman();
+                $current_onstrike_batsman->inning_id = $inning->id;
+                $current_onstrike_batsman->batsman_id = $batsman_id;
+                $current_onstrike_batsman->save();
+
+                $current_partnership = new MatchInningPartnership();
+                $current_partnership->inning_id = $inning->id;
+                $current_partnership->batsman1_id = $current_nonstrike_batsman->id;
+                $current_partnership->batsman2_id = $current_onstrike_batsman->id;
+                $current_partnership->save();
+
+                $inning->current_onstrike_batsman_id = $current_onstrike_batsman->id;
+                $inning->save();
+            }
+        }
+        return false;
+    }
+}
+
+if (!function_exists('getBatsman')) {
+    function getBatsman($inning, $team_id, $prev_batsman = null)
+    {
+        $players = "";
+        if($prev_batsman){
+            /*$next_player = Player::select('players.id')
+                ->leftJoin('match_inning_batsmen', 'players.id', '=', 'match_inning_batsmen.batsman_id')
+                ->where(['players.team_id' => $team_id])
+                ->where(['match_inning_batsmen.has_batted' => 0])
+                ->where(['match_inning_batsmen.is_batting' => 0])
+                ->first();
+            return $next_player->id;*/
+            $players = Player::where('batting_order', '>', $prev_batsman->batting_order)->where(['team_id' => $team_id])->orderBy('batting_order', 'asc')->get();
+        } else {
+            $players = Player::where(['team_id' => $team_id])->orderBy('batting_order', 'asc')->get();
+        }
+        foreach ($players as $player) {
+            $inning_player = MatchInningBatsman::where(['batsman_id' => $player->id])->where(['inning_id' => $inning->id])->first();
+            if (empty($inning_player)) {
+                return $player->id;
             }
         }
         return false;
@@ -320,6 +435,13 @@ if (!function_exists('updateScore')) {
 
         $inning->runs = $inning->runs + $score;
         $inning->save();
+
+        if ($inning->number == 2 && $inning->runs > $inning->match->matchInnings[0]->runs) {
+            endInnings($inning);
+            return true;
+        }
+
+        return false;
     }
 }
 
@@ -384,54 +506,6 @@ if (!function_exists('changeBowler')) {
     }
 }
 
-if (!function_exists('changeBatsman')) {
-    function changeBatsman($current_onstrike_batsman, $current_nonstrike_batsman, $current_bowler, $current_partnership, $inning, $is_bowler_bowled)
-    {
-        $current_onstrike_batsman->is_on_strike = 0;
-        $current_onstrike_batsman->is_batting = 0;
-        if ($is_bowler_bowled) {
-            $current_onstrike_batsman->bowled_by_id = $current_bowler->bowler_id;
-        }
-        if ($current_onstrike_batsman->save()) {
-            $current_bowler->wickets = $current_bowler->wickets + 1;
-            $current_bowler->save();
-
-            $inning->wickets = $inning->wickets + 1;
-            $inning->save();
-
-            $fow = new MatchInningFow();
-            $fow->inning_id = $inning->id;
-            $fow->bowled_by_id = $current_bowler->bowler_id;
-            $fow->number = $inning->wickets;
-            $fow->runs = $inning->runs;
-            $fow->overs = round($inning->overs, 1);
-            if ($fow->save()) {
-                if ($inning->wickets == 10) {
-                    endInnings($inning);
-                    return true;
-                }
-                /* Assigning new Batsman */
-                $batsman_id = getBatsman($inning, $inning->batting_team_id);
-
-                $current_onstrike_batsman = new MatchInningBatsman();
-                $current_onstrike_batsman->inning_id = $inning->id;
-                $current_onstrike_batsman->batsman_id = $batsman_id;
-                $current_onstrike_batsman->save();
-
-                $current_partnership = new MatchInningPartnership();
-                $current_partnership->inning_id = $inning->id;
-                $current_partnership->batsman1_id = $current_nonstrike_batsman->id;
-                $current_partnership->batsman2_id = $current_onstrike_batsman->id;
-                $current_partnership->save();
-
-                $inning->current_onstrike_batsman_id = $current_onstrike_batsman->id;
-                $inning->save();
-            }
-        }
-        return false;
-    }
-}
-
 if (!function_exists('crossing')) {
     function crossing($current_onstrike_batsman, $current_nonstrike_batsman, $inning)
     {
@@ -477,6 +551,7 @@ if (!function_exists('calculateRunRate')) {
 if (!function_exists('checkOverEnd')) {
     function checkOverEnd($overs)
     {
+        $overs = round($overs, 1);
         $arr = explode(".", $overs);
         if ($arr[1] == 6) {
             return true;

@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $bowled_by_id
  * @property boolean $is_on_strike
  * @property boolean $is_batting
+ * @property boolean $has_batted
  * @property int $runs
  * @property int $balls
  * @property int $fours
@@ -29,7 +30,7 @@ class MatchInningBatsman extends Model
     /**
      * @var array
      */
-    protected $fillable = ['inning_id', 'batsman_id', 'bowled_by_id', 'is_on_strike', 'is_batting', 'runs', 'balls', 'fours', 'sixes', 'strike_rate', 'created_at', 'updated_at'];
+    protected $fillable = ['inning_id', 'batsman_id', 'bowled_by_id', 'is_on_strike', 'is_batting', 'has_batted', 'runs', 'balls', 'fours', 'sixes', 'strike_rate', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
