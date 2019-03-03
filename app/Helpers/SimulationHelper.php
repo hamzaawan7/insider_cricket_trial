@@ -14,6 +14,11 @@ use App\MatchInningFow;
 use App\MatchInningPartnership;
 use App\Player;
 
+
+/* This is the basic function for simulation */
+/* It calls different functions on the basis of the event happened*/
+/* This works according to the bowling_rate, the bigger the bowling rate the slower this algo*/
+/* Can be more optimized if given time*/
 if (!function_exists('simulate')) {
     function simulate($inning)
     {

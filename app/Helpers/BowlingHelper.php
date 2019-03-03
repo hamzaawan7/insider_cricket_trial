@@ -14,6 +14,7 @@ use App\MatchInningFow;
 use App\MatchInningPartnership;
 use App\Player;
 
+/* Check if the bowler has reached limit, if so give id of new one*/
 if (!function_exists('getBowler')) {
     function getBowler($inning, $team_id)
     {
@@ -34,6 +35,7 @@ if (!function_exists('getBowler')) {
     }
 }
 
+/* Make changes according to the bowl if the bowl was of right line and length*/
 if (!function_exists('goodBowlData')) {
     function goodBowlDataUpdate($inning, $current_onstrike_batsman, $current_bowler, $current_partnership)
     {
@@ -50,19 +52,21 @@ if (!function_exists('goodBowlData')) {
         $current_bowler->economy = calculateEconomy($current_bowler->runs, $current_bowler->overs);
         $current_bowler->save();
 
-        $current_partnership->balls_faced = $current_bowler->zeros + 1;
-        $current_partnership->balls_faced = calculateStrikeRate($current_partnership->runs_contribution, $current_partnership->balls_faced);
-        /*$current_partnership->save();*/
+        $current_partnership->runs_contribution = $current_partnership->runs_contribution + 1;
+        $current_partnership->balls_faced = $current_partnership->balls_faced + 1;
+        $current_partnership->strike_rate = calculateStrikeRate($current_partnership->runs_contribution, $current_partnership->balls_faced);
     }
 }
 
+/* Change a bowler, see of the previous bowler has reached his limit of 4, if so introduct new bowler*/
 if (!function_exists('changeBowler')) {
     function changeBowler($current_bowler, $inning)
     {
         $inning->overs = round($inning->overs);
         $current_bowler->overs = round($current_bowler->overs);
         $current_bowler->has_bowled_previous_over = 1;
-        /*$current_bowler->save();*/
+        $current_bowler->save();
+
         /* Assigning new Bowler */
         $bowler_id = getBowler($inning, $inning->fielding_team_id);
         $has_bowled = false;
@@ -75,14 +79,14 @@ if (!function_exists('changeBowler')) {
         }
         $current_bowler->is_bowling = 0;
         $current_bowler->has_bowled_previous_over = 1;
-        /*$current_bowler->save();*/
+        $current_bowler->save();
 
         if ($has_bowled) {
             $current_bowler = MatchInningBowler::where(['bowler_id' => $bowler_id])
                 ->where(['inning_id' => $inning->id])
                 ->first();
             $current_bowler->is_bowling = 1;
-            /*$current_bowler->save();*/
+            $current_bowler->save();
         } else {
             $current_bowler = new MatchInningBowler();
             $current_bowler->inning_id = $inning->id;

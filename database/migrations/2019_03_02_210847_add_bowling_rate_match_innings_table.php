@@ -15,7 +15,7 @@ class AddBowlingRateMatchInningsTable extends Migration
     {
         //
         Schema::table('match_innings', function (Blueprint $table) {
-            $table->double('bowling_rate')->default(1.5)->after('current_partnership_id');
+            $table->double('bowling_rate')->default(2.5)->after('current_partnership_id');
         });
     }
 

@@ -13,7 +13,9 @@ use App\MatchInningExtra;
 use App\MatchInningFow;
 use App\MatchInningPartnership;
 use App\Player;
+use App\Standing;
 
+/* start a new innings, introduce pair of batsman, a bowler, a partnership, and a record for innings extras which will be updated live*/
 if (!function_exists('start_innings')) {
     function start_innings($match, $number = 1)
     {
@@ -22,7 +24,7 @@ if (!function_exists('start_innings')) {
         $inning->batting_team_id = ($number == 1) ? $match->team1_id : $match->team2_id;
         $inning->fielding_team_id = ($number == 1) ? $match->team2_id : $match->team1_id;
         $inning->number = $number;
-        $inning->target = ($number == 2) ? $match->matchInnings[0]->runs + 1 : null;
+        $inning->target = ($number == 2) ? $match->currentInning->runs + 1 : null;
         if ($inning->save()) {
             $batsman1 = new MatchInningBatsman();
             $batsman1->inning_id = $inning->id;
@@ -37,8 +39,8 @@ if (!function_exists('start_innings')) {
 
             $partnership = new MatchInningPartnership();
             $partnership->inning_id = $inning->id;
-            $partnership->batsman1_id = $batsman1->id;
-            $partnership->batsman2_id = $batsman2->id;
+            $partnership->batsman1_id = $batsman1->batsman_id;
+            $partnership->batsman2_id = $batsman2->batsman_id;
             $partnership->save();
 
             $bowler = new MatchInningBowler();
@@ -63,6 +65,9 @@ if (!function_exists('start_innings')) {
     }
 }
 
+/* end the innings and see if the ended inning was a 1st or 2nd*/
+/* if 1st start second inning*/
+/* if 2nd end the match and change standings table accordingly*/
 if (!function_exists('endInnings')) {
     function endInnings($inning)
     {
@@ -70,15 +75,27 @@ if (!function_exists('endInnings')) {
         $inning->save();
         $match = $inning->match;
         if ($inning->number != 2) {
+            /* Check If First Innings, if so create new Innings*/
             start_innings($match, 2);
         } else {
-            $match->winner_team_id = ($match->matchInnings[0]->runs >= $match->matchInnings[1]->runs) ? $match->matchInnings[1]->team1_id : $match->matchInnings[1]->team2_id;
-            $match->match_status_id = 3;
-            $match->save();
+            /* Check If Second Innings, if so create new Innings*/
+            $winner = 0;
+            $loser = 0;
+            if ($inning->runs >= $inning->target) {
+                $winner = $inning->batting_team_id;
+                $loser = $inning->fielding_team_id;
+            } else if ($inning->runs < $inning->target - 1) {
+                $loser = $inning->batting_team_id;
+                $winner = $inning->fielding_team_id;
+            }
+            changeStandings($winner, $loser);
         }
+        $match->match_status_id = 3;
+        $match->save();
     }
 }
 
+/* the extras score has to be added against a team and innings in this function*/
 if (!function_exists('addExtraScore')) {
     function addExtraScore($current_extra_record, $current_bowler, $inning, $how)
     {
@@ -105,21 +122,23 @@ if (!function_exists('addExtraScore')) {
     }
 }
 
+/* change the bowling_rate, depending on the event, explained thoroughly in the github documentation*/
 if (!function_exists('changeBowlingRate')) {
     function changeBowlingRate($inning, $code)
     {
         $arr = getBowlingRateCode($code);
-        if($arr['is_increase']){
+        if ($arr['is_increase']) {
             $inning->bowling_rate = round($inning->bowling_rate + $arr['rate'], '1');
         } else {
             $inning->bowling_rate = round($inning->bowling_rate - $arr['rate'], '1');
-            if($inning->bowling_rate < 1){
+            if ($inning->bowling_rate < 1) {
                 $inning->bowling_rate = 1;
             }
         }
     }
 }
 
+/* update score, batsman and bowling stats if a run or a boundary has been scored */
 if (!function_exists('updateScore')) {
     function updateScore($current_onstrike_batsman, $current_bowler, $current_partnership, $inning, $score)
     {
@@ -142,6 +161,8 @@ if (!function_exists('updateScore')) {
         /*$current_bowler->save();*/
 
         $current_partnership->runs_contribution = $current_partnership->runs_contribution + $score;
+        $current_partnership->balls_faced = $current_partnership->balls_faced + 1;
+        $current_partnership->strike_rate = calculateStrikeRate($current_partnership->runs_contribution, $current_partnership->balls_faced);
         /*$current_partnership->save();*/
 
         $inning->runs = $inning->runs + $score;
@@ -156,6 +177,7 @@ if (!function_exists('updateScore')) {
     }
 }
 
+/* crossing at the end of an over is acheived by this function*/
 if (!function_exists('crossing')) {
     function crossing($current_onstrike_batsman, $current_nonstrike_batsman, $inning)
     {
@@ -185,13 +207,31 @@ if (!function_exists('checkOverEnd')) {
     }
 }
 
+/* check if the innings has ended by 20 overs completion*/
 if (!function_exists('checkInningEnd')) {
     function checkInningEnd($overs)
     {
-        $arr = explode(".", $overs);
+        $arr = explode(".", round($overs, 1));
         if ($arr[0] == Config::get('constants.match_over_limit') - 1) {
             return true;
         }
         return false;
+    }
+}
+
+/* change the standings after the match has been finished*/
+if (!function_exists('changeStandings')) {
+    function changeStandings($winner, $loser)
+    {
+        $standing = Standing::where(['team_id', $winner])->first();
+        $standing->matches_played = $standing->matches_played + 1;
+        $standing->won = $standing->won + 1;
+        $standing->points = $standing->points + 3;
+        $standing->save();
+
+        $standing = Standing::where(['team_id', $loser])->first();
+        $standing->matches_played = $standing->matches_played + 1;
+        $standing->lost = $standing->lost + 1;
+        $standing->save();
     }
 }

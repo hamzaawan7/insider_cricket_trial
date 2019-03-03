@@ -38,7 +38,8 @@
                                 @endforeach
                             </div>
                         @endif
-                        <a href="{{ route('match', $match->id) }}" class="trans-btn text-blue btn">
+                        <a href="#{{--{{ route('match', $match->id) }}--}}" onclick="return false;"
+                           class="trans-btn text-blue btn">
                             Match Overview
                             <span class="btn-icon fa fa-chevron-right"></span>
                         </a>
@@ -127,7 +128,8 @@
                                                                         Fall of Wickets:
                                                                     </strong>
                                                                     @foreach($inning->matchInningFows as $fow)
-                                                                        {{ $fow->number }} - {{ $fow->runs }} ({{ $fow->overs }} ov) &nbsp;
+                                                                        {{ $fow->number }} - {{ $fow->runs }}
+                                                                        ({{ $fow->overs }} ov) &nbsp;
                                                                         &nbsp;
                                                                     @endforeach
                                                                 </td>
@@ -138,6 +140,7 @@
                                                 </div>
                                             </div>
                                         @endif
+
                                         @if(count($inning->matchInningBowlers))
                                             <div class="bowling">
                                                 <div class="table-responsive">
@@ -163,7 +166,7 @@
                                                                 <td>
                                                                     {{ $player->bowler->short_name }}
                                                                     @if($player->is_bowling)
-                                                                        *
+                                                                        <span style="color: red">*</span>
                                                                     @endif
                                                                 </td>
                                                                 <td>{{ $player->overs }}</td>
@@ -185,6 +188,55 @@
                                         @endif
                                     </div>
                                 @endforeach
+
+                                @if(count($inning->matchInningPartnerships))
+                                    <div class="batting">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                <tr>
+                                                    <th width="35%">Partnerships</th>
+                                                    <th width="45%"></th>
+                                                    <th width="7%"></th>
+                                                    <th width="7%"></th>
+                                                    <th width="7%">R</th>
+                                                    <th width="7%">B</th>
+                                                    <th width="7%">SR</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                @foreach($inning->matchInningPartnerships as $partnership)
+                                                    <tr>
+                                                        <td>
+                                                            {{ $partnership->batsman1->short_name }}
+                                                        </td>
+                                                        <td>
+                                                            {{ $partnership->batsman2->short_name }}
+                                                        </td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td>{{ $partnership->runs_contribution }}</td>
+                                                        <td>{{ $partnership->balls_faced }}</td>
+                                                        <td>{{ $partnership->strike_rate }}</td>
+                                                    </tr>
+                                                @endforeach
+                                                @if(count($inning->matchInningExtras))
+                                                    <tr class="sub-res">
+                                                        <td colspan="3">Extras</td>
+                                                        <td colspan="4">
+                                                            {{ $inning->matchInningExtras[0]->total }}
+                                                            (w {{ $inning->matchInningExtras[0]->wides }}
+                                                            ,
+                                                            nb {{ $inning->matchInningExtras[0]->no_balls }}
+                                                            )
+                                                        </td>
+                                                    </tr>
+                                                @endif
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                @endif
                             @else
                                 <center>
                                     <a href="{{ route('start-matches') }}" class="btn btn-danger">START

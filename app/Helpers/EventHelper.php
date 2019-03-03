@@ -14,6 +14,8 @@ use App\MatchInningFow;
 use App\MatchInningPartnership;
 use App\Player;
 
+/* This file contains all the events that occur and their codes which are used in the simulation function*/
+
 if (!function_exists('howOut')) {
     function howOut()
     {

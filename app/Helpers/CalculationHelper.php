@@ -14,6 +14,7 @@ use App\MatchInningFow;
 use App\MatchInningPartnership;
 use App\Player;
 
+/* calculate strike rate*/
 if (!function_exists('calculateStrikeRate')) {
     function calculateStrikeRate($runs, $balls)
     {
@@ -21,6 +22,7 @@ if (!function_exists('calculateStrikeRate')) {
     }
 }
 
+/* calculate economy of a bowler*/
 if (!function_exists('calculateEconomy')) {
     function calculateEconomy($runs, $overs)
     {
@@ -30,6 +32,7 @@ if (!function_exists('calculateEconomy')) {
     }
 }
 
+/* calculate runrate of team*/
 if (!function_exists('calculateRunRate')) {
     function calculateRunRate($runs, $overs)
     {

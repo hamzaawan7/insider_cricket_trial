@@ -14,12 +14,11 @@
 
 
 
-Route::get('/match/{id}', 'MatchController@index')->name('match');
 
 Route::get('/standings', 'StandingController@index')->name('standings');
 
 
-
+Route::get('/match/{id}', 'MatchController@index')->name('match');
 Route::get('/matches/{tournament_id?}', 'RoundController@runSimulation')->name('matches');
 Route::get('/run-simulation/{tournament_id?}', 'RoundController@runSimulation')->name('run-simulation');
 Route::get('/start-matches/{tournament_id?}', 'RoundController@startMatches')->name('start-matches');

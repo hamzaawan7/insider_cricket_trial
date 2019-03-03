@@ -50,432 +50,169 @@
                 <div class="col-md-9">
                     <div class="xo-content">
                         <!-- Tour infor and current match final results -->
-                        <div class="tour-info">
-                            <div class="tour-header">
-                                <strong>Result</strong>
-                                <p>2nd ODI (D/N), West Indies tour of India at Visakhapatnam, Oct 24 2018</p>
-                            </div>
-                            <div class="tour-body clearboth">
-                                <div class="flag-info left-info">
-                                    <img src="images/matches/india.png" alt="">
-                                    <h3>india <br>321/6</h3>
+                        @if(!empty($match))
+                            <div class="tour-info">
+                                <div class="tour-header">
+                                    <strong>Result</strong>
+                                    <p>{{ $match->team1->name }} vs {{ $match->team2->name }},
+                                        at {{ $match->venue->name }}</p>
                                 </div>
-                                <div class="flag-info right-info">
-                                    <img src="images/matches/west-indies.png" alt="">
-                                    <h3>West Indies <br>321/7 (50 ov)</h3>
+                                <div class="tour-body clearboth">
+                                    <div class="flag-info left-info">
+                                        <img src="{{ $match->team1->logo }}" alt="">
+                                        <h3>{{ $match->team1->abbreviation }} <br>
+                                            {{ $match->matchInnings[0]->runs }} / {{ $match->matchInnings[0]->wickets }}
+                                            ({{ $match->matchInnings[0]->overs }} ov)
+                                        </h3>
+                                    </div>
+                                    <div class="flag-info right-info">
+                                        <img src="{{ $match->team2->logo }}" alt="">
+                                        <h3>{{ $match->team2->abbreviation }} <br>
+                                            {{ $match->matchInnings[1]->runs }} / {{ $match->matchInnings[1]->wickets }}
+                                            ({{ $match->matchInnings[1]->overs }} ov)
+                                        </h3>
+                                    </div>
                                 </div>
-                                <h4 class="score-result">Match tied</h4>
                             </div>
-                        </div>
-                        <!-- each team performance -->
+                        @endif
+                    <!-- each team performance -->
                         <div class="perform">
-                            <div class="inning">
-                                <h6>India Innings (50 overs maximum)</h6>
-                                <div class="batting">
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <thead>
-                                            <tr>
-                                                <th width="35%">BATSMEN</th>
-                                                <th width="40%"></th>
-                                                <th width="5%">R</th>
-                                                <th width="5%">B</th>
-                                                <th width="5%">4s</th>
-                                                <th width="5%">6s</th>
-                                                <th width="5%">SR</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
-                                                <td>RG Sharma</td>
-                                                <td>c Hetmyer b Roach</td>
-                                                <td>4</td>
-                                                <td>8</td>
-                                                <td>1</td>
-                                                <td>0</td>
-                                                <td>50.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>S Dhawan</td>
-                                                <td>lbw b Nurse</td>
-                                                <td>1</td>
-                                                <td>8</td>
-                                                <td>1</td>
-                                                <td>0</td>
-                                                <td>96.66</td>
-                                            </tr>
-                                            <tr>
-                                                <td>V Kohli (c)</td>
-                                                <td>not out</td>
-                                                <td>0</td>
-                                                <td>8</td>
-                                                <td>1</td>
-                                                <td>0</td>
-                                                <td>50.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>AT Rayudu</td>
-                                                <td>b Nurse</td>
-                                                <td>1</td>
-                                                <td>8</td>
-                                                <td>1</td>
-                                                <td>0</td>
-                                                <td>96.66</td>
-                                            </tr>
-                                            <tr>
-                                                <td>MS Dhoni †</td>
-                                                <td>c Hetmyer b Roach</td>
-                                                <td>0</td>
-                                                <td>8</td>
-                                                <td>1</td>
-                                                <td>0</td>
-                                                <td>50.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>RR Pant</td>
-                                                <td>lbw b Nurse</td>
-                                                <td>1</td>
-                                                <td>8</td>
-                                                <td>1</td>
-                                                <td>0</td>
-                                                <td>96.66</td>
-                                            </tr>
-                                            <tr>
-                                                <td>RA Jadeja</td>
-                                                <td>not out</td>
-                                                <td>0</td>
-                                                <td>8</td>
-                                                <td>1</td>
-                                                <td>0</td>
-                                                <td>50.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Mohammed Shami</td>
-                                                <td>b Nurse</td>
-                                                <td>1</td>
-                                                <td>8</td>
-                                                <td>1</td>
-                                                <td>0</td>
-                                                <td>96.66</td>
-                                            </tr>
-                                            <tr class="sub-res">
-                                                <td colspan="3">Extras</td>
-                                                <td colspan="4">8 (lb 3, w 5)</td>
-                                            </tr>
-                                            <tr class="total">
-                                                <td colspan="3">TOTAL</td>
-                                                <td colspan="4">321/6 (50 Overs, RR: 6.42)</td>
-                                            </tr>
-                                            <tr class="dnb">
-                                                <td colspan="7"><strong>Did not bat:</strong> YS Chahal, UT Yadav,
-                                                    Kuldeep Yadav
-                                                </td>
-                                            </tr>
-                                            <tr class="fow">
-                                                <td colspan="7"><strong>Fall of wickets:</strong> 1-15 (RG Sharma, 3.1
-                                                    ov), 2-40 (S Dhawan, 8.4 ov), 3-179 (AT Rayudu, 32.2 ov), 4-222 (MS
-                                                    Dhoni, 40.2 ov), 5-248 <br>(RR Pant, 43.3 ov), 6-307 (RA Jadeja,
-                                                    48.5 ov)
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
+                            @if(count($match->matchInnings))
+                                @foreach($match->matchInnings as $inning)
+                                    <div class="inning">
+                                        <h6>
+                                            {{ $inning->battingTeam->name }}
+                                            Innings (20 overs maximum)
+                                        </h6>
+                                        @if(count($inning->matchInningBatsmens))
+                                            <div class="batting">
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <thead>
+                                                        <tr>
+                                                            <th width="35%">BATSMEN</th>
+                                                            <th width="40%"></th>
+                                                            <th width="5%">R</th>
+                                                            <th width="5%">B</th>
+                                                            <th width="5%">4s</th>
+                                                            <th width="5%">6s</th>
+                                                            <th width="5%">SR</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        @foreach($inning->matchInningBatsmens as $player)
+                                                            <tr>
+                                                                <td>
+                                                                    {{ $player->batsman->short_name }}
+                                                                    @if($player->is_on_strike && $player->is_batting)
+                                                                        <span style="color: red">*</span>
+                                                                    @endif
+                                                                </td>
+                                                                <td>
+                                                                    @if($player->is_batting && !$player->has_batted)
+                                                                        not out
+                                                                    @endif
+                                                                </td>
+                                                                <td>{{ $player->runs }}</td>
+                                                                <td>{{ $player->balls }}</td>
+                                                                <td>{{ $player->fours }}</td>
+                                                                <td>{{ $player->sixes }}</td>
+                                                                <td>{{ $player->strike_rate }}</td>
+                                                            </tr>
+                                                        @endforeach
+                                                        @if(count($inning->matchInningExtras))
+                                                            <tr class="sub-res">
+                                                                <td colspan="3">Extras</td>
+                                                                <td colspan="4">
+                                                                    {{ $inning->matchInningExtras[0]->total }}
+                                                                    (w {{ $inning->matchInningExtras[0]->wides }}
+                                                                    ,
+                                                                    nb {{ $inning->matchInningExtras[0]->no_balls }}
+                                                                    )
+                                                                </td>
+                                                            </tr>
+                                                        @endif
+                                                        <tr class="total">
+                                                            <td colspan="3">TOTAL</td>
+                                                            <td colspan="4">
+                                                                {{ $inning->runs }}/{{ $inning->wickets }}
+                                                                ({{ $inning->overs }} Overs,
+                                                                RR: {{ $inning->run_rate }})
+                                                            </td>
+                                                        </tr>
+                                                        @if(count($inning->matchInningFows))
+                                                            <tr class="fow">
+                                                                <td colspan="7">
+                                                                    <strong>
+                                                                        Fall of Wickets:
+                                                                    </strong>
+                                                                    @foreach($inning->matchInningFows as $fow)
+                                                                        {{ $fow->number }} - {{ $fow->runs }}
+                                                                        ({{ $fow->overs }} ov) &nbsp;
+                                                                        &nbsp;
+                                                                    @endforeach
+                                                                </td>
+                                                            </tr>
+                                                        @endif
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        @endif
+                                        @if(count($inning->matchInningBowlers))
+                                            <div class="bowling">
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <thead>
+                                                        <tr>
+                                                            <th width="50%">BOWLING</th>
+                                                            <th width="5%">O</th>
+                                                            <th width="5%">M</th>
+                                                            <th width="5%">R</th>
+                                                            <th width="5%">W</th>
+                                                            <th width="5%">ECON</th>
+                                                            <th width="5%">0S</th>
+                                                            <th width="5%">4S</th>
+                                                            <th width="5%">6S</th>
+                                                            <th width="5%">WD</th>
+                                                            <th width="5%">NB</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        @foreach($inning->matchInningBowlers as $player)
+                                                            <tr>
+                                                                <td>
+                                                                    {{ $player->bowler->short_name }}
+                                                                    @if($player->is_bowling)
+                                                                        *
+                                                                    @endif
+                                                                </td>
+                                                                <td>{{ $player->overs }}</td>
+                                                                <td>{{ $player->maiden }}</td>
+                                                                <td>{{ $player->runs }}</td>
+                                                                <td>{{ $player->wickets }}</td>
+                                                                <td>{{ $player->economy }}</td>
+                                                                <td>{{ $player->zeros }}</td>
+                                                                <td>{{ $player->fours }}</td>
+                                                                <td>{{ $player->sixes }}</td>
+                                                                <td>{{ $player->wides }}</td>
+                                                                <td>{{ $player->no_balls }}</td>
+                                                            </tr>
+                                                        @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        @endif
                                     </div>
-                                </div>
-                                <div class="bowling">
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <thead>
-                                            <tr>
-                                                <th width="50%">BOWLING</th>
-                                                <th width="5%">O</th>
-                                                <th width="5%">M</th>
-                                                <th width="5%">R</th>
-                                                <th width="5%">W</th>
-                                                <th width="5%">ECON</th>
-                                                <th width="5%">0S</th>
-                                                <th width="5%">4S</th>
-                                                <th width="5%">6S</th>
-                                                <th width="5%">WD</th>
-                                                <th width="5%">NB</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
-                                                <td>JO Holder</td>
-                                                <td>6</td>
-                                                <td>0</td>
-                                                <td>50</td>
-                                                <td>0</td>
-                                                <td>8.33</td>
-                                                <td>16</td>
-                                                <td>9</td>
-                                                <td>0</td>
-                                                <td>1</td>
-                                                <td>0</td>
-                                            </tr>
-                                            <tr>
-                                                <td>KAJ Roach</td>
-                                                <td>6</td>
-                                                <td>0</td>
-                                                <td>50</td>
-                                                <td>0</td>
-                                                <td>8.33</td>
-                                                <td>16</td>
-                                                <td>9</td>
-                                                <td>0</td>
-                                                <td>1</td>
-                                                <td>0</td>
-                                            </tr>
-                                            <tr>
-                                                <td>AR Nurse</td>
-                                                <td>6</td>
-                                                <td>0</td>
-                                                <td>50</td>
-                                                <td>0</td>
-                                                <td>8.33</td>
-                                                <td>16</td>
-                                                <td>9</td>
-                                                <td>0</td>
-                                                <td>1</td>
-                                                <td>0</td>
-                                            </tr>
-                                            <tr>
-                                                <td>D Bishoo</td>
-                                                <td>6</td>
-                                                <td>0</td>
-                                                <td>50</td>
-                                                <td>0</td>
-                                                <td>8.33</td>
-                                                <td>16</td>
-                                                <td>9</td>
-                                                <td>0</td>
-                                                <td>1</td>
-                                                <td>0</td>
-                                            </tr>
-                                            <tr>
-                                                <td>OC McCoy</td>
-                                                <td>6</td>
-                                                <td>0</td>
-                                                <td>50</td>
-                                                <td>0</td>
-                                                <td>8.33</td>
-                                                <td>16</td>
-                                                <td>9</td>
-                                                <td>0</td>
-                                                <td>1</td>
-                                                <td>0</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="inning">
-                                <h6>Westindies Innings (50 overs maximum)</h6>
-                                <div class="batting">
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <thead>
-                                            <tr>
-                                                <th width="35%">BATSMEN</th>
-                                                <th width="40%"></th>
-                                                <th width="5%">R</th>
-                                                <th width="5%">B</th>
-                                                <th width="5%">4s</th>
-                                                <th width="5%">6s</th>
-                                                <th width="5%">SR</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
-                                                <td>RG Sharma</td>
-                                                <td>c Hetmyer b Roach</td>
-                                                <td>4</td>
-                                                <td>8</td>
-                                                <td>1</td>
-                                                <td>0</td>
-                                                <td>50.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>S Dhawan</td>
-                                                <td>lbw b Nurse</td>
-                                                <td>1</td>
-                                                <td>8</td>
-                                                <td>1</td>
-                                                <td>0</td>
-                                                <td>96.66</td>
-                                            </tr>
-                                            <tr>
-                                                <td>V Kohli (c)</td>
-                                                <td>not out</td>
-                                                <td>0</td>
-                                                <td>8</td>
-                                                <td>1</td>
-                                                <td>0</td>
-                                                <td>50.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>AT Rayudu</td>
-                                                <td>b Nurse</td>
-                                                <td>1</td>
-                                                <td>8</td>
-                                                <td>1</td>
-                                                <td>0</td>
-                                                <td>96.66</td>
-                                            </tr>
-                                            <tr>
-                                                <td>MS Dhoni †</td>
-                                                <td>c Hetmyer b Roach</td>
-                                                <td>0</td>
-                                                <td>8</td>
-                                                <td>1</td>
-                                                <td>0</td>
-                                                <td>50.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>RR Pant</td>
-                                                <td>lbw b Nurse</td>
-                                                <td>1</td>
-                                                <td>8</td>
-                                                <td>1</td>
-                                                <td>0</td>
-                                                <td>96.66</td>
-                                            </tr>
-                                            <tr>
-                                                <td>RA Jadeja</td>
-                                                <td>not out</td>
-                                                <td>0</td>
-                                                <td>8</td>
-                                                <td>1</td>
-                                                <td>0</td>
-                                                <td>50.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Mohammed Shami</td>
-                                                <td>b Nurse</td>
-                                                <td>1</td>
-                                                <td>8</td>
-                                                <td>1</td>
-                                                <td>0</td>
-                                                <td>96.66</td>
-                                            </tr>
-                                            <tr class="sub-res">
-                                                <td colspan="3">Extras</td>
-                                                <td colspan="4">8 (lb 3, w 5)</td>
-                                            </tr>
-                                            <tr class="total">
-                                                <td colspan="3">TOTAL</td>
-                                                <td colspan="4">321/6 (50 Overs, RR: 6.42)</td>
-                                            </tr>
-                                            <tr class="dnb">
-                                                <td colspan="7"><strong>Did not bat:</strong> YS Chahal, UT Yadav,
-                                                    Kuldeep Yadav
-                                                </td>
-                                            </tr>
-                                            <tr class="fow">
-                                                <td colspan="7"><strong>Fall of wickets:</strong> 1-15 (RG Sharma, 3.1
-                                                    ov), 2-40 (S Dhawan, 8.4 ov), 3-179 (AT Rayudu, 32.2 ov), 4-222 (MS
-                                                    Dhoni, 40.2 ov), 5-248 <br>(RR Pant, 43.3 ov), 6-307 (RA Jadeja,
-                                                    48.5 ov)
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div class="bowling">
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <thead>
-                                            <tr>
-                                                <th width="50%">BOWLING</th>
-                                                <th width="5%">O</th>
-                                                <th width="5%">M</th>
-                                                <th width="5%">R</th>
-                                                <th width="5%">W</th>
-                                                <th width="5%">ECON</th>
-                                                <th width="5%">0S</th>
-                                                <th width="5%">4S</th>
-                                                <th width="5%">6S</th>
-                                                <th width="5%">WD</th>
-                                                <th width="5%">NB</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
-                                                <td>JO Holder</td>
-                                                <td>6</td>
-                                                <td>0</td>
-                                                <td>50</td>
-                                                <td>0</td>
-                                                <td>8.33</td>
-                                                <td>16</td>
-                                                <td>9</td>
-                                                <td>0</td>
-                                                <td>1</td>
-                                                <td>0</td>
-                                            </tr>
-                                            <tr>
-                                                <td>KAJ Roach</td>
-                                                <td>6</td>
-                                                <td>0</td>
-                                                <td>50</td>
-                                                <td>0</td>
-                                                <td>8.33</td>
-                                                <td>16</td>
-                                                <td>9</td>
-                                                <td>0</td>
-                                                <td>1</td>
-                                                <td>0</td>
-                                            </tr>
-                                            <tr>
-                                                <td>AR Nurse</td>
-                                                <td>6</td>
-                                                <td>0</td>
-                                                <td>50</td>
-                                                <td>0</td>
-                                                <td>8.33</td>
-                                                <td>16</td>
-                                                <td>9</td>
-                                                <td>0</td>
-                                                <td>1</td>
-                                                <td>0</td>
-                                            </tr>
-                                            <tr>
-                                                <td>D Bishoo</td>
-                                                <td>6</td>
-                                                <td>0</td>
-                                                <td>50</td>
-                                                <td>0</td>
-                                                <td>8.33</td>
-                                                <td>16</td>
-                                                <td>9</td>
-                                                <td>0</td>
-                                                <td>1</td>
-                                                <td>0</td>
-                                            </tr>
-                                            <tr>
-                                                <td>OC McCoy</td>
-                                                <td>6</td>
-                                                <td>0</td>
-                                                <td>50</td>
-                                                <td>0</td>
-                                                <td>8.33</td>
-                                                <td>16</td>
-                                                <td>9</td>
-                                                <td>0</td>
-                                                <td>1</td>
-                                                <td>0</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
+                                @endforeach
+                            @else
+                                <center>
+                                    <a href="{{ route('start-matches') }}" class="btn btn-danger">START
+                                        MATHCES!!!</a>
+                                </center>
+                            @endif
                         </div>
-                        <!-- series status -->
-                        <h3 class="series-status all-caps">India led the 5-match series 1-0</h3>
                     </div>
                 </div>
                 <!-- Sidebar -->
