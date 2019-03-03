@@ -88,11 +88,11 @@ if (!function_exists('endInnings')) {
             $winner = 0;
             $loser = 0;
             if ($inning->runs >= $inning->target) {
-                $winner = $inning->match->team1_id;
-                $loser = $inning->match->team2_id;
+                $winner = $inning->match->team2_id;
+                $loser = $inning->match->team1_id;
             } else if ($inning->runs < $inning->target - 1) {
-                $loser = $inning->match->team2_id;
                 $winner = $inning->match->team1_id;
+                $loser = $inning->match->team2_id;
             }
             $match->winner_team_id = $winner;
             $match->match_status_id = 3;
