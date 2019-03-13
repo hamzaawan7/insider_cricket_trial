@@ -77,6 +77,7 @@ if (!function_exists('endInnings')) {
     function endInnings($inning)
     {
         $inning->is_completed = 1;
+        $inning->overs = round($inning->overs);
         $inning->save();
         $match = $inning->match;
         if ($inning->number != 2) {
@@ -93,6 +94,11 @@ if (!function_exists('endInnings')) {
             } else if ($inning->runs < $inning->target - 1) {
                 $winner = $inning->match->team1_id;
                 $loser = $inning->match->team2_id;
+            } else {
+                matchDrawn($inning->match->team1_id, $inning->match->team2_id);
+                $match->match_status_id = 3;
+                $match->save();
+                return;
             }
             $match->winner_team_id = $winner;
             $match->match_status_id = 3;
@@ -121,7 +127,7 @@ if (!function_exists('addExtraScore')) {
         $inning->runs = $inning->runs + 1;
         /*$inning->save();*/
 
-        if ($inning->number == 2 && $inning->runs >= $inning->target->runs) {
+        if ($inning->number == 2 && $inning->runs >= $inning->target) {
             endInnings($inning);
             return true;
         }
@@ -169,7 +175,6 @@ if (!function_exists('updateScore')) {
         /*$current_bowler->save();*/
 
         $current_partnership->runs_contribution = $current_partnership->runs_contribution + $score;
-        $current_partnership->balls_faced = $current_partnership->balls_faced + 1;
         $current_partnership->strike_rate = calculateStrikeRate($current_partnership->runs_contribution, $current_partnership->balls_faced);
         /*$current_partnership->save();*/
 
@@ -208,8 +213,10 @@ if (!function_exists('checkOverEnd')) {
     function checkOverEnd($overs)
     {
         $arr = explode(".", round($overs, 1));
-        if ($arr[1] == 6) {
-            return true;
+        if(!empty($arr[1])){
+            if ($arr[1] == Config::get('constants.over_ball_limit')) {
+                return true;
+            }
         }
         return false;
     }
@@ -220,7 +227,7 @@ if (!function_exists('checkInningEnd')) {
     function checkInningEnd($overs)
     {
         $arr = explode(".", round($overs, 1));
-        if ($arr[0] == Config::get('constants.match_over_limit') - 1) {
+        if ($arr[0] == Config::get('constants.match_over_limit') - 1 && $arr[1] == Config::get('constants.over_ball_limit')) {
             return true;
         }
         return false;
@@ -240,6 +247,22 @@ if (!function_exists('changeStandings')) {
         $standing = Standing::where(['team_id' => $loser])->first();
         $standing->matches_played = $standing->matches_played + 1;
         $standing->lost = $standing->lost + 1;
+        $standing->save();
+    }
+}
+
+/* change the stats after the match has been drawn*/
+if (!function_exists('matchDrawn')) {
+    function matchDrawn($team1, $team2)
+    {
+        $standing = Standing::where(['team_id' => $team1])->first();
+        $standing->matches_played = $standing->matches_played + 1;
+        $standing->points = $standing->points + 1;
+        $standing->save();
+
+        $standing = Standing::where(['team_id' => $team2])->first();
+        $standing->matches_played = $standing->matches_played + 1;
+        $standing->points = $standing->points + 1;
         $standing->save();
     }
 }

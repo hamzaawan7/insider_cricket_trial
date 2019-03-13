@@ -21,7 +21,7 @@
                                     @if(!empty($match->winnerTeam))
                                         {{ $match->winnerTeam->abbreviation }} WON
                                     @else
-                                        WON
+                                        MATCH DRAWN
                                     @endif
                                 </span>
                             </div>

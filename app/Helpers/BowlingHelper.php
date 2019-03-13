@@ -52,7 +52,6 @@ if (!function_exists('goodBowlData')) {
         $current_bowler->economy = calculateEconomy($current_bowler->runs, $current_bowler->overs);
         $current_bowler->save();
 
-        $current_partnership->runs_contribution = $current_partnership->runs_contribution + 1;
         $current_partnership->balls_faced = $current_partnership->balls_faced + 1;
         $current_partnership->strike_rate = calculateStrikeRate($current_partnership->runs_contribution, $current_partnership->balls_faced);
     }

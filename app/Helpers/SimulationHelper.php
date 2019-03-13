@@ -32,7 +32,7 @@ if (!function_exists('simulate')) {
             $event = whatHappened();
             switch ($event) {
                 case 0:
-                    goodBowlDataUpdate($inning, $current_onstrike_batsman, $current_bowler, $current_partnership);
+                    goodBowlDataUpdate($inning, $current_onstrike_batsman, $current_bowler, $current_partnership, 1);
                     changeBowlingRate($inning, "dot");
                     break;
                 case 1:
