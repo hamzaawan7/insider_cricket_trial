@@ -17,6 +17,7 @@ class MatchesTableSeeder extends Seeder
             [
                 'title' => 'CSK vs SH',
                 'tournament_id' => 1,
+                'round_id' => 1,
                 'team1_id' => 1,
                 'team2_id' => 8,
                 'venue_id' => 1,
@@ -28,6 +29,7 @@ class MatchesTableSeeder extends Seeder
             [
                 'title' => 'MI vs KXP',
                 'tournament_id' => 1,
+                'round_id' => 1,
                 'team1_id' => 4,
                 'team2_id' => 2,
                 'venue_id' => 2,
@@ -39,6 +41,7 @@ class MatchesTableSeeder extends Seeder
             [
                 'title' => 'RR vs KKR',
                 'tournament_id' => 1,
+                'round_id' => 1,
                 'team1_id' => 5,
                 'team2_id' => 6,
                 'venue_id' => 4,
@@ -50,6 +53,7 @@ class MatchesTableSeeder extends Seeder
             [
                 'title' => 'DK vs RCB',
                 'tournament_id' => 1,
+                'round_id' => 1,
                 'team1_id' => 7,
                 'team2_id' => 3,
                 'venue_id' => 3,
